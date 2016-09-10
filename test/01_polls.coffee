@@ -9,10 +9,15 @@ pollId = null
 
 describe 'Poll tests', ->
 	this.timeout(default_timeout)
-	it 'should create a Apoll', (done) ->
+	it 'should create a poll', (done) ->
 		server.post("/create")
 		.timeout(default_timeout)
-		.send(whatever:"TestValue")
+		.send({
+			question:"Who to do you plan to vote for",
+			responses: ["Hillary","Trump"]
+			period_start : ~~((new date()).getTime()/1000)
+			period_end :   ~~((new date()).getTime()/1000) + 600
+			})
 		.expect('Content-type', /json/)
 		.expect(200)
 		.end (error, response) ->
