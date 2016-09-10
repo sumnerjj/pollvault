@@ -18,8 +18,8 @@ exports.create = (req,res,next)->
 		newownerId = uuid.v4()
 		request {
 			method:"POST", 
-			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries"
-			body : {
+			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries?access_token=#{config.access_key}",
+			json : {
 				fields : {
 					question: req.body.question
 					responses : req.body.responses
@@ -28,13 +28,11 @@ exports.create = (req,res,next)->
 					creator_auth_token : newownerId
 					poll_id : newpollId
 				}
-			}
+			},
 			header : {
-				Authorization : "Bearer #{config.contenfulkey}",
 				"X-Contentful-Content-Type" : "poll",
 				"Content-Type" : "application/vnd.contentful.management.v1+json"
 			},
-			json:true
 		}, (cf_err, cf_rp,cf_body)->
 			if cf_err? or cf_body.sys?.type is "Error"
 				console.log "We got an error from ContentFul", cf_err, cf_body
