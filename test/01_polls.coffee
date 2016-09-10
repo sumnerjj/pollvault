@@ -20,7 +20,7 @@ describe 'Poll tests', ->
 		server.post("/create")
 		.timeout(default_timeout)
 		.send({
-			question:"Who to do you plan to vote for '",
+			question:"Who to do you plan to vote for ?",
 			responses: responses
 			period_start : period_start
 			period_end :  period_end
@@ -28,6 +28,7 @@ describe 'Poll tests', ->
 		.expect('Content-type', /json/)
 		.expect(200)
 		.end (error, response) ->
+			#console.log "----- respnse where", error, response
 			response.status.should.equal 200
 			response.body.should.have.property 'pollId'
 			response.body.should.have.property 'authToken'

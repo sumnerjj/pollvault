@@ -22,7 +22,8 @@
     "body-parser": "^1.15.2",
     "contentful": "^3.5.0",
     "express": "^4.14.0",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
+    "request": "^2.74.0"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",

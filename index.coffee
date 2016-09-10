@@ -27,7 +27,7 @@ requireAuthKey = (req,res,next)->
 		next()
 
 # any operation other than the homepage request needs an apiKey
-app.all /\/.+/, requireAuthKey
+#app.all /\/.+/, requireAuthKey
 
 polls = require "./lib/polls.coffee"
 router.post "/create", polls.create
@@ -36,7 +36,6 @@ router.post "/create", polls.create
 app.use '/',router
 app.listen 3000, ->
 	console.log "I am listening at PORT 3000"
-	console.log config.contenfulkey
 
 
 exports = module.exports = app;
