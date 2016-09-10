@@ -1,0 +1,36 @@
+{
+  "name": "pollvault",
+  "version": "1.0.0",
+  "description": "An easy to use evaluative polling app for making collective decisions",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha ./test --reporter supersamples",
+    "test-dev": "nodemon --exec \"./node_modules/.bin/mocha || true\" -e js,coffee",
+    "dev": "nodemon --ignore test/ index.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumnerjj/pollvault.git"
+  },
+  "author": "API World Hackaton Challenge Table 7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumnerjj/pollvault/issues"
+  },
+  "homepage": "https://github.com/sumnerjj/pollvault#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "node-uuid": "^1.4.7"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "faker": "^3.1.0",
+    "mocha": "^2.5.3",
+    "mocha-clean": "^1.0.0",
+    "nodemon": "^1.10.2",
+    "should": "^11.1.0",
+    "supersamples": "^1.0.0",
+    "supertest": "^2.0.0"
+  }
+}

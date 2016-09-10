@@ -1,0 +1,5 @@
+--require mocha-clean
+--require coffee-script
+--compilers coffee:coffee-script/register
+--recursive
+-b
