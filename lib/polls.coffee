@@ -21,21 +21,21 @@ exports.create = (req,res,next)->
 			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries?access_token=#{config.access_key}",
 			json : {
 				fields : {
-					question: req.body.question
-					responses : req.body.responses
-					period_start : req.body.period_start
-					period_end : req.body.period_end
-					creator_auth_token : newownerId
-					poll_id : newpollId
+					question: {"en-US":req.body.question}
+					responses : {"en-US":req.body.responses}
+					period_start : {"en-US":req.body.period_start}
+					period_end : {"en-US":req.body.period_end}
+					creator_auth_token : {"en-US":newownerId}
+					poll_id : {"en-US":newpollId}
 				}
 			},
-			header : {
+			headers : {
 				"X-Contentful-Content-Type" : "poll",
 				"Content-Type" : "application/vnd.contentful.management.v1+json"
 			},
 		}, (cf_err, cf_rp,cf_body)->
 			if cf_err? or cf_body.sys?.type is "Error"
-				console.log "We got an error from ContentFul", cf_err, cf_body
+				console.log "We got an error from ContentFul", cf_err, JSON.stringify(cf_body)
 				res.sendStatus 500
 			else
 				res.json {pollId:newpollId,authToken:newownerId}
