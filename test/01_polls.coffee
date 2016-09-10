@@ -9,7 +9,7 @@ pollId = null
 fakeemails = [faker.internet.email(),faker.internet.email(),faker.internet.email()]
 magiclinks = {}
 responses = ["Hillary","Trump"]
-possiblevalues = [0,1,2,3,4,5,6,7,8,9,10]
+possiblevalues = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 ownerauthToken = null
 period_start = ~~((new Date()).getTime()/1000)
 period_end = period_start + 600
@@ -35,10 +35,9 @@ describe 'Poll tests', ->
 			pollId = response.body.guid
 			done()
 	it 'should share a poll', (done) ->
-		server.post("/create/share",{authToken:ownerauthToken})
+		server.post("/create/share/#{pollId}")
 		.timeout(default_timeout)
 		.send({
-			pollId : pollId
 			emails : fakeemails
 			authToken : ownerauthToken
 			})
@@ -49,7 +48,6 @@ describe 'Poll tests', ->
 			response.body.should.have.property 'magiclinks'
 			for email in fakeemails
 				response.body.magiclinks.should.have.property 'email'
-				response.body.magiclinks[email].should.have.property 'link'
 				response.body.magiclinks[email].should.have.property 'authToken'
 			magiclinks = response.body.magiclinks
 			done()
@@ -68,7 +66,6 @@ for email, magiclink of magiclinks
 			.expect(200)
 			.end (err,response)->
 				response.status.should.equal 200
-				response.body.should.have.property 'magiclinks'
 				done()
 
 describe "Owner should be able to see the Poll Results", ->
@@ -82,7 +79,7 @@ describe "Owner should be able to see the Poll Results", ->
 			response.body.should.have.property 'results'
 			for result in responses
 				response.body.responses.should.have.property result
-				response.body.responses[result].should.be.within(0, 10)
+				response.body.responses[result].should.be.within(0, 1)
 			done()
 for email, magiclink of magiclinks
 	describe "#{email} should be able to see the Poll Results", ->
@@ -96,6 +93,6 @@ for email, magiclink of magiclinks
 				response.body.should.have.property 'results'
 				for result in responses
 					response.body.responses.should.have.property result
-					response.body.responses[result].should.be.within(0, 10)
+					response.body.responses[result].should.be.within(0, 1)
 				done()
 
