@@ -1,6 +1,6 @@
 express = require "express"
 bodyParser = require "body-parser"
-config = require('./config.coffee');
+config = require('./config.json');
 app = express()
 app.use bodyParser.urlencoded({extended:true})
 app.use bodyParser.json()
