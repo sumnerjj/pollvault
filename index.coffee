@@ -14,7 +14,7 @@ app.use (req, res, next)->
 
 
 router.get '/',(req,res)->
-	res.redirect '/docs'
+	res.json {"message" : "Hello !"}
 
 app.use express.static('public')
 app.use '/docs', express.static(__dirname + '/tmp')
