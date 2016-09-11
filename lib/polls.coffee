@@ -1,4 +1,4 @@
-uuid = require "node-uuid"
+shortid = require "shortid"
 contentful = require "contentful"
 config = require ".././config.json"
 client = contentful.createClient {
@@ -14,8 +14,8 @@ exports.create = (req,res,next)->
 	else
 		req.body.period_start ?= ~~((new Date().getTime)/1000)
 		req.body.period_end ?= req.body.period_start + 600
-		newpollId = uuid.v4()
-		newownerId = uuid.v4()
+		newpollId = shortid.generate()
+		newownerId = shortid.generate()
 		request {
 			method:"POST", 
 			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries?access_token=#{config.access_key}",

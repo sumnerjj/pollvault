@@ -23,7 +23,8 @@
     "contentful": "^3.5.0",
     "express": "^4.14.0",
     "node-uuid": "^1.4.7",
-    "request": "^2.74.0"
+    "request": "^2.74.0",
+    "shortid": "^2.2.6"
   },
   "devDependencies": {
     "coffee-script": "^1.10.0",
