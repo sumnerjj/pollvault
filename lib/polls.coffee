@@ -46,5 +46,28 @@ exports.share = (req,res,next)->
 		else
 			data = JSON.parse(data)
 			console.log "here's the stuff: ", data
+			creator_auth_token = data.creator_auth_token
 			#res.json {pollId:newpollId,authToken:newownerId}
 			#next()
+		if auth_token is creator_auth_token
+			console.log "authenticated success"
+			payload = {}
+			for email in emails
+				new_user_auth = shortid.generate()
+				user_responses_filename = config.filespath + "/" + poll_id + "_" + new_user_auth + ".json"
+				fs.writeFile filepath, "{}", (err)->
+					if err?
+						console.log err
+						res.sendStatus 500
+						break
+					else
+						payload[email] = {authToken: new_user_auth}
+			res.json {magiclinks; payload}
+
+		else
+			res.sendStatus 403
+
+
+
+
+
