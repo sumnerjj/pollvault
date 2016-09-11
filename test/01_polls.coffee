@@ -67,9 +67,7 @@ describe 'Poll tests', ->
 		.end (err,response)->
 			response.status.should.equal 200
 			done()
-
-describe "Owner should be able to see the Poll Results", ->
-	it "shoud be able to get the results", (done)->
+	it "Owner shoud be able to get the results", (done)->
 		server.get("/poll/#{pollId}/#{ownerauthToken}")
 		.timeout(default_timeout)
 		.expect('Content-type', /json/)
@@ -81,17 +79,16 @@ describe "Owner should be able to see the Poll Results", ->
 				response.body.responses.should.have.property result
 				response.body.responses[result].should.be.within(0, 1)
 			done()
-for email, magiclink of magiclinks
-	describe "#{email} should be able to see the Poll Results", ->
-		it "shoud be able to get the results", (done)->
-			server.get("/poll/#{pollId}/#{magiclink.authToken}")
-			.timeout(default_timeout)
-			.expect('Content-type', /json/)
-			.expect(200)
-			.end (error, response) ->
-				response.status.should.equal 200
-				response.body.should.have.property 'results'
-				for result, value of response.body.results
-					response.body.responses[result].should.be.within(0, 1)
-				done()
+	testemail = fakeemails[1]
+	it "#{testemail} shoud be able to get the results", (done)->
+		server.get("/poll/#{pollId}/#{magiclinks[testemail].authToken}}")
+		.timeout(default_timeout)
+		.expect('Content-type', /json/)
+		.expect(200)
+		.end (error, response) ->
+			response.status.should.equal 200
+			response.body.should.have.property 'results'
+			for result, value of response.body.results
+				response.body.responses[result].should.be.within(0, 1)
+			done()
 
