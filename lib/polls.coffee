@@ -1,16 +1,12 @@
 shortid = require "shortid"
-contentful = require "contentful"
 config = require ".././config.json"
-client = contentful.createClient {
-	space: config.contentfulspace
-	accessToken: config.contenfulkey
-}
+async = require 'async'
 
 request = require "request"
 fs = require "fs"
 
 exports.create = (req,res,next)->
-	if !req.body.question? or !Array.isArray(req.body.responses) or !req.body.responses.length > 1
+	if !req.body.question? or !Array.isArray(req.body.pollOptions) or !req.body.pollOptions.length > 1
 		res.sendStatus 500
 	else
 		req.body.period_start ?= ~~((new Date().getTime)/1000)
@@ -20,7 +16,7 @@ exports.create = (req,res,next)->
 		filepath = config.filespath + "/#{newpollId}.json"
 		fs.writeFile filepath, JSON.stringify({
 					question: req.body.question
-					responses : req.body.responses
+					responses : req.body.pollOptions
 					period_start : req.body.period_start
 					period_end : req.body.period_end
 					creator_auth_token : newownerId
@@ -45,27 +41,33 @@ exports.share = (req,res,next)->
 			res.sendStatus 404
 		else
 			data = JSON.parse(data)
-			console.log "here's the stuff: ", data
+			#console.log "here's the stuff: ", data
 			creator_auth_token = data.creator_auth_token
 			#res.json {pollId:newpollId,authToken:newownerId}
 			#next()
-		if auth_token is creator_auth_token
-			console.log "authenticated success"
-			payload = {}
-			for email in emails
-				new_user_auth = shortid.generate()
-				user_responses_filename = config.filespath + "/" + poll_id + "_" + new_user_auth + ".json"
-				fs.writeFile filepath, "{}", (err)->
-					if err?
-						console.log err
+			if auth_token is creator_auth_token
+				console.log "authenticated success"
+				payload = {}
+				async.each emails, (email,cb)->
+					new_user_auth = shortid.generate()
+					user_responses_filename = config.filespath + "/" + poll_id + "_" + new_user_auth + ".json"
+					fs.writeFile user_responses_filename, "{}", (err)->
+						if err?
+							console.log err
+							cb(true)
+						else
+							payload[email] = {authToken: new_user_auth}
+							cb(false)
+				,(mainerror)->
+					if mainerror?
 						res.sendStatus 500
-						break
 					else
-						payload[email] = {authToken: new_user_auth}
-			res.json {magiclinks; payload}
+						res.json {magiclinks: payload}
+			else
+				res.sendStatus 403
 
-		else
-			res.sendStatus 403
+
+
 
 
 

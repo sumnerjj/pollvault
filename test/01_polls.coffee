@@ -22,14 +22,13 @@ describe 'Poll tests', ->
 		.timeout(default_timeout)
 		.send({
 			question:question_title,
-			responses: responses
+			pollOptions: responses
 			period_start : period_start
 			period_end :  period_end
 			})
 		.expect('Content-type', /json/)
 		.expect(200)
 		.end (error, response) ->
-			#console.log "----- respnse where", error, response
 			response.status.should.equal 200
 			response.body.should.have.property 'pollId'
 			response.body.should.have.property 'authToken'
@@ -49,7 +48,7 @@ describe 'Poll tests', ->
 			response.status.should.equal 200
 			response.body.should.have.property 'magiclinks'
 			for email in fakeemails
-				response.body.magiclinks.should.have.property 'email'
+				response.body.magiclinks.should.have.property email
 				response.body.magiclinks[email].should.have.property 'authToken'
 			magiclinks = response.body.magiclinks
 			done()
