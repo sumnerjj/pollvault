@@ -95,8 +95,7 @@ for email, magiclink of magiclinks
 			.end (error, response) ->
 				response.status.should.equal 200
 				response.body.should.have.property 'results'
-				for result in responses
-					response.body.responses.should.have.property result
+				for result, value of response.body.results
 					response.body.responses[result].should.be.within(0, 1)
 				done()
 
