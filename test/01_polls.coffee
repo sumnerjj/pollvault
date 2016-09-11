@@ -56,14 +56,16 @@ describe 'Poll tests', ->
 
 for email, magiclink of magiclinks
 	describe "Poll Responses tests for #{email}", ->
+		payload_responses = {}
+		for res in responses
+			payload_responses[res] = possiblevalues[Math.floor(Math.random()*possiblevalues.length)]
 		it "should accept votes from #{email}", (done)->
 			server.post("/poll/vote/#{pollId}")
 			.timeout(default_timeout)
 			.send({
 				authToken : magiclink.authToken
-				response : responses[Math.floor(Math.random()*responses.length)]
-				value : possiblevalues[Math.floor(Math.random()*possiblevalues.length)]
-				})
+				responses : payload_responses
+			})
 			.expect('Content-type', /json/)
 			.expect(200)
 			.end (err,response)->
