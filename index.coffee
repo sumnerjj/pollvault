@@ -14,7 +14,10 @@ app.use (req, res, next)->
 
 
 router.get '/',(req,res)->
-	res.json {"message" : "Hello !"}
+	res.redirect '/docs'
+
+app.use express.static('public')
+app.use '/docs', express.static(__dirname + '/tmp')
 
 
 requireAuthKey = (req,res,next)->
