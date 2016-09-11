@@ -7,6 +7,7 @@ client = contentful.createClient {
 }
 
 request = require "request"
+fs = require "fs"
 
 exports.create = (req,res,next)->
 	if !req.body.question? or !Array.isArray(req.body.responses) or !req.body.responses.length > 1
@@ -16,26 +17,17 @@ exports.create = (req,res,next)->
 		req.body.period_end ?= req.body.period_start + 600
 		newpollId = shortid.generate()
 		newownerId = shortid.generate()
-		request {
-			method:"POST", 
-			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries?access_token=#{config.access_key}",
-			json : {
-				fields : {
-					question: {"en-US":req.body.question}
-					responses : {"en-US":req.body.responses}
-					period_start : {"en-US":req.body.period_start}
-					period_end : {"en-US":req.body.period_end}
-					creator_auth_token : {"en-US":newownerId}
-					poll_id : {"en-US":newpollId}
-				}
-			},
-			headers : {
-				"X-Contentful-Content-Type" : "poll",
-				"Content-Type" : "application/vnd.contentful.management.v1+json"
-			},
-		}, (cf_err, cf_rp, cf_body)->
-			if cf_err? or cf_body.sys?.type is "Error"
-				console.log "We got an error from ContentFul", cf_err, JSON.stringify(cf_body)
+		filepath = config.filespath + "/#{newpollId}.json"
+		fs.writeFile filepath, JSON.stringify({
+					question: req.body.question
+					responses : req.body.responses
+					period_start : req.body.period_start
+					period_end : req.body.period_end
+					creator_auth_token : newownerId
+					poll_id : newpollId
+				}), (write_err)->
+			if write_err?
+				console.log "We got an error from FS",write_err
 				res.sendStatus 500
 			else
 				res.json {pollId:newpollId,authToken:newownerId}
@@ -43,25 +35,16 @@ exports.create = (req,res,next)->
 
 
 exports.share = (req,res,next)->
-	#console.log req
 	poll_id = req.params.pollId
 	auth_token = req.body.authToken
 	emails = req.body.emails
-	console.log poll_id, auth_token, emails
-
-	request {
-			method:"GET", 
-			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries/#{poll_id}?access_token=#{config.access_key}",
-			headers : {
-				"X-Contentful-Content-Type" : "poll",
-				"Content-Type" : "application/vnd.contentful.management.v1+json"
-			},
-		}, (cf_err, cf_rp, cf_body)->
-			if cf_err? or cf_body.sys?.type is "Error"
-				console.log "We got an error from ContentFul", cf_err, JSON.stringify(cf_body)
-				res.sendStatus 500
-
-			else
-				console.log "here's the stuff: ", JSON.stringify(cf_body)
-				#res.json {pollId:newpollId,authToken:newownerId}
-				#next()
+	filepath = config.filespath + "/#{poll_id}.json"
+	fs.readFile filepath, (err_read,data)->
+		if err_read?
+			console.log "Error whiel reading #{filepath}", err_read
+			res.sendStatus 404
+		else
+			data = JSON.parse(data)
+			console.log "here's the stuff: ", data
+			#res.json {pollId:newpollId,authToken:newownerId}
+			#next()
