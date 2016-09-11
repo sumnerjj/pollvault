@@ -6,7 +6,7 @@ request = require "request"
 fs = require "fs"
 
 exports.create = (req,res,next)->
-	if !req.body.question? or !Array.isArray(req.body.options) or !req.body.options.length > 1
+	if !req.body.question? or !Array.isArray(req.body.poll_options) or !req.body.poll_options.length > 1
 		res.sendStatus 500
 	else
 		req.body.period_start ?= ~~((new Date().getTime)/1000)
@@ -16,7 +16,7 @@ exports.create = (req,res,next)->
 		filepath = config.filespath + "/#{newpollId}.json"
 		fs.writeFile filepath, JSON.stringify({
 					question: req.body.question
-					options : req.body.options
+					poll_options : req.body.poll_options
 					period_start : req.body.period_start
 					period_end : req.body.period_end
 					creator_auth_token : newownerId

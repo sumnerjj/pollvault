@@ -22,7 +22,7 @@ describe 'Poll tests', ->
 		.timeout(default_timeout)
 		.send({
 			question:question_title,
-			options: responses
+			poll_options: responses
 			period_start : period_start
 			period_end :  period_end
 			})
