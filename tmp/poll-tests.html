@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>API Documentation</title>
+      <link rel="stylesheet" href="css/foundation.min.css" />
+      <link rel="stylesheet" type="text/css" href="css/styles.css" />
+      <link rel="stylesheet" type="text/css" href="css/highlight.github.css" />
+      
+        <link rel="stylesheet" type="text/css" href="custom.css" />
+      
+  </head>
+
+
+  <body class="antialiased hide-extras">
+
+    <div class="sidebar-top">
+  <div class="logo"></div>
+  API Documentation
+</div>
+
+<div class="sidebar">
+  
+  <form>
+    <input tabindex="1" id="autocomplete" type="search"
+          placeholder="search" autocomplete="off" />
+  </form>
+
+  <nav>
+    <ul class="side-nav">
+
+      
+
+          <li class="divider"></li>
+
+          <li class="heading">
+            <a href="poll-tests.html">Poll tests</a>
+          </li>
+
+          
+            <li>
+              <a href="poll-tests.html#owner-shoud-be-able-to-get-the-results" data-search="Owner shoud be able to get the results">
+                Owner shoud be able to get the results
+                
+                  <span class="label">1</span>
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="poll-tests.html#skyla---yahoo-com-shoud-be-able-to-get-the-results" data-search="Skyla85@yahoo.com shoud be able to get the results">
+                Skyla85@yahoo.com shoud be able to get the results
+                
+                  <span class="label">1</span>
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="poll-tests.html#should-accept-votes-from-jasen-ullrich---yahoo-com" data-search="should accept votes from Jasen_Ullrich23@yahoo.com">
+                should accept votes from Jasen_Ullrich23@yahoo.com
+                
+                  <span class="label">1</span>
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="poll-tests.html#should-create-a-poll" data-search="should create a poll">
+                should create a poll
+                
+                  <span class="label">1</span>
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="poll-tests.html#should-share-a-poll" data-search="should share a poll">
+                should share a poll
+                
+                  <span class="label">1</span>
+                
+              </a>
+            </li>
+          
+
+      
+
+          <li class="divider"></li>
+
+          <li class="heading">
+            <a href="sample-unit-test.html">SAMPLE unit test</a>
+          </li>
+
+          
+            <li>
+              <a href="sample-unit-test.html#should-return-home-page" data-search="should return home page">
+                should return home page
+                
+                  <span class="label">1</span>
+                
+              </a>
+            </li>
+          
+
+      
+
+    </ul>
+  </nav>
+
+</div>
+
+
+    <div class="content-top"></div>
+    <div class="content">
+
+      <h1>Poll tests</h1>
+
+      
+        <div class="group">
+          <a name="owner-shoud-be-able-to-get-the-results"></a>
+          <h2>Owner shoud be able to get the results</h2>
+          <ul class="samples">
+            
+              <li>
+                <div class="summary">
+  <p>Owner shoud be able to get the results</p>
+
+</div>
+
+<div class="operation">
+
+  <div class="method color-GET">
+    GET
+  </div>
+
+  <div class="request">
+    <div class="url">
+      GET
+      
+        <pre><code>/poll/SyRkbQm2/HJeC1WmQh</code></pre>
+      
+    </div>
+    Sample request
+    <div class="expanders">
+      
+      
+      
+      
+      <a href="#sample4-request-curl">curl</a><span>
+    </div>
+  </div>
+
+  <div id="sample4-url" class="collapsible">
+    <pre><code>/poll/SyRkbQm2/HJeC1WmQh</code></pre>
+  </div>
+  <div id="sample4-request-headers" class="collapsible">
+    <pre><code></code></pre>
+  </div>
+  <div id="sample4-request-payload" class="collapsible">
+    
+  </div>
+  <div id="sample4-request-attachments" class="collapsible">
+    
+  </div>
+  <div id="sample4-request-curl" class="collapsible">
+    <pre><code class="wrap">curl -X <span class="hljs-keyword">GET</span> <span class="hljs-string">"http://localhost/poll/SyRkbQm2/HJeC1WmQh"</span></code></pre>
+  </div>
+
+  <div class="response">
+    Response 200 OK
+    <div class="expanders">
+      
+        <a href="#sample4-response-headers">headers</a>
+      
+      
+        <a href="#sample4-response-body">body</a>
+      
+    </div>
+  </div>
+
+  <div id="sample4-response-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+</code></pre>
+  </div>
+  <div id="sample4-response-body" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">question</span>": <span class="hljs-value"><span class="hljs-string">"Who to do you plan to vote for Chandler?"</span></span>,
+  "<span class="hljs-attribute">poll_options</span>": <span class="hljs-value">[
+    <span class="hljs-string">"Hillary"</span>,
+    <span class="hljs-string">"Trump"</span>
+  ]</span>,
+  "<span class="hljs-attribute">period_start</span>": <span class="hljs-value"><span class="hljs-number">1473618149</span></span>,
+  "<span class="hljs-attribute">period_end</span>": <span class="hljs-value"><span class="hljs-number">1473618749</span></span>,
+  "<span class="hljs-attribute">poll_id</span>": <span class="hljs-value"><span class="hljs-string">"SyRkbQm2"</span></span>,
+  "<span class="hljs-attribute">responses</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">Hillary</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+      "<span class="hljs-attribute">Trump</span>": <span class="hljs-value"><span class="hljs-number">0.5</span>
+    </span>},
+    {},
+    {}
+  ]
+</span>}</code></pre>
+  </div>
+
+</div>
+
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="group">
+          <a name="skyla---yahoo-com-shoud-be-able-to-get-the-results"></a>
+          <h2>Skyla85@yahoo.com shoud be able to get the results</h2>
+          <ul class="samples">
+            
+              <li>
+                <div class="summary">
+  <p>Skyla85@yahoo.com shoud be able to get the results</p>
+
+</div>
+
+<div class="operation">
+
+  <div class="method color-GET">
+    GET
+  </div>
+
+  <div class="request">
+    <div class="url">
+      GET
+      
+        <pre><code>/poll/SyRkbQm2/BJfRy-773}</code></pre>
+      
+    </div>
+    Sample request
+    <div class="expanders">
+      
+      
+      
+      
+      <a href="#sample5-request-curl">curl</a><span>
+    </div>
+  </div>
+
+  <div id="sample5-url" class="collapsible">
+    <pre><code>/poll/SyRkbQm2/BJfRy-773}</code></pre>
+  </div>
+  <div id="sample5-request-headers" class="collapsible">
+    <pre><code></code></pre>
+  </div>
+  <div id="sample5-request-payload" class="collapsible">
+    
+  </div>
+  <div id="sample5-request-attachments" class="collapsible">
+    
+  </div>
+  <div id="sample5-request-curl" class="collapsible">
+    <pre><code class="wrap">curl -X <span class="hljs-keyword">GET</span> <span class="hljs-string">"http://localhost/poll/SyRkbQm2/BJfRy-773}"</span></code></pre>
+  </div>
+
+  <div class="response">
+    Response 200 OK
+    <div class="expanders">
+      
+        <a href="#sample5-response-headers">headers</a>
+      
+      
+        <a href="#sample5-response-body">body</a>
+      
+    </div>
+  </div>
+
+  <div id="sample5-response-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+</code></pre>
+  </div>
+  <div id="sample5-response-body" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">question</span>": <span class="hljs-value"><span class="hljs-string">"Who to do you plan to vote for Chandler?"</span></span>,
+  "<span class="hljs-attribute">poll_options</span>": <span class="hljs-value">[
+    <span class="hljs-string">"Hillary"</span>,
+    <span class="hljs-string">"Trump"</span>
+  ]</span>,
+  "<span class="hljs-attribute">period_start</span>": <span class="hljs-value"><span class="hljs-number">1473618149</span></span>,
+  "<span class="hljs-attribute">period_end</span>": <span class="hljs-value"><span class="hljs-number">1473618749</span></span>,
+  "<span class="hljs-attribute">poll_id</span>": <span class="hljs-value"><span class="hljs-string">"SyRkbQm2"</span></span>,
+  "<span class="hljs-attribute">responses</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">Hillary</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+      "<span class="hljs-attribute">Trump</span>": <span class="hljs-value"><span class="hljs-number">0.5</span>
+    </span>},
+    {},
+    {}
+  ]
+</span>}</code></pre>
+  </div>
+
+</div>
+
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="group">
+          <a name="should-accept-votes-from-jasen-ullrich---yahoo-com"></a>
+          <h2>should accept votes from Jasen_Ullrich23@yahoo.com</h2>
+          <ul class="samples">
+            
+              <li>
+                <div class="summary">
+  <p>should accept votes from Jasen_Ullrich23@yahoo.com</p>
+
+</div>
+
+<div class="operation">
+
+  <div class="method color-POST">
+    POST
+  </div>
+
+  <div class="request">
+    <div class="url">
+      POST
+      
+        <pre><code>/poll/vote/SyRkbQm2/BJfRy-773</code></pre>
+      
+    </div>
+    Sample request
+    <div class="expanders">
+      
+      
+        <a href="#sample3-request-headers">headers</a><span>
+      
+      
+        <a href="#sample3-request-payload">payload</a>
+      
+      
+      <a href="#sample3-request-curl">curl</a><span>
+    </div>
+  </div>
+
+  <div id="sample3-url" class="collapsible">
+    <pre><code>/poll/vote/SyRkbQm2/BJfRy-773</code></pre>
+  </div>
+  <div id="sample3-request-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">content-length</span>: <span class="hljs-string">39</span>
+</code></pre>
+  </div>
+  <div id="sample3-request-payload" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">responses</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">Hillary</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+    "<span class="hljs-attribute">Trump</span>": <span class="hljs-value"><span class="hljs-number">0.5</span>
+  </span>}
+</span>}</code></pre>
+  </div>
+  <div id="sample3-request-attachments" class="collapsible">
+    
+  </div>
+  <div id="sample3-request-curl" class="collapsible">
+    <pre><code class="wrap">curl -X POST -H <span class="hljs-string">"content-type: application/json"</span> -H <span class="hljs-string">"content-length: 39"</span> -d <span class="hljs-string">'{"</span>responses<span class="hljs-string">":{"</span>Hillary<span class="hljs-string">":0,"</span>Trump<span class="hljs-string">":0.5}}'</span> <span class="hljs-string">"http://localhost/poll/vote/SyRkbQm2/BJfRy-773"</span></code></pre>
+  </div>
+
+  <div class="response">
+    Response 200 OK
+    <div class="expanders">
+      
+        <a href="#sample3-response-headers">headers</a>
+      
+      
+        <a href="#sample3-response-body">body</a>
+      
+    </div>
+  </div>
+
+  <div id="sample3-response-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">text/plain; charset=utf-8</span>
+</code></pre>
+  </div>
+  <div id="sample3-response-body" class="collapsible">
+    <pre><code><span class="hljs-string">"OK"</span></code></pre>
+  </div>
+
+</div>
+
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="group">
+          <a name="should-create-a-poll"></a>
+          <h2>should create a poll</h2>
+          <ul class="samples">
+            
+              <li>
+                <div class="summary">
+  <p>should create a poll</p>
+
+</div>
+
+<div class="operation">
+
+  <div class="method color-POST">
+    POST
+  </div>
+
+  <div class="request">
+    <div class="url">
+      POST
+      
+        <pre><code>/create</code></pre>
+      
+    </div>
+    Sample request
+    <div class="expanders">
+      
+      
+        <a href="#sample1-request-headers">headers</a><span>
+      
+      
+        <a href="#sample1-request-payload">payload</a>
+      
+      
+      <a href="#sample1-request-curl">curl</a><span>
+    </div>
+  </div>
+
+  <div id="sample1-url" class="collapsible">
+    <pre><code>/create</code></pre>
+  </div>
+  <div id="sample1-request-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">content-length</span>: <span class="hljs-string">140</span>
+</code></pre>
+  </div>
+  <div id="sample1-request-payload" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">question</span>": <span class="hljs-value"><span class="hljs-string">"Who to do you plan to vote for Chandler?"</span></span>,
+  "<span class="hljs-attribute">poll_options</span>": <span class="hljs-value">[
+    <span class="hljs-string">"Hillary"</span>,
+    <span class="hljs-string">"Trump"</span>
+  ]</span>,
+  "<span class="hljs-attribute">period_start</span>": <span class="hljs-value"><span class="hljs-number">1473618149</span></span>,
+  "<span class="hljs-attribute">period_end</span>": <span class="hljs-value"><span class="hljs-number">1473618749</span>
+</span>}</code></pre>
+  </div>
+  <div id="sample1-request-attachments" class="collapsible">
+    
+  </div>
+  <div id="sample1-request-curl" class="collapsible">
+    <pre><code class="wrap">curl -X POST -H <span class="hljs-string">"content-type: application/json"</span> -H <span class="hljs-string">"content-length: 140"</span> -d <span class="hljs-string">'{"</span>question<span class="hljs-string">":"</span>Who to <span class="hljs-keyword">do</span> you plan to vote <span class="hljs-keyword">for</span> Chandler?<span class="hljs-string">","</span>poll_options<span class="hljs-string">":["</span>Hillary<span class="hljs-string">","</span>Trump<span class="hljs-string">"],"</span>period_start<span class="hljs-string">":1473618149,"</span>period_end<span class="hljs-string">":1473618749}'</span> <span class="hljs-string">"http://localhost/create"</span></code></pre>
+  </div>
+
+  <div class="response">
+    Response 200 OK
+    <div class="expanders">
+      
+        <a href="#sample1-response-headers">headers</a>
+      
+      
+        <a href="#sample1-response-body">body</a>
+      
+    </div>
+  </div>
+
+  <div id="sample1-response-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+</code></pre>
+  </div>
+  <div id="sample1-response-body" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">pollId</span>": <span class="hljs-value"><span class="hljs-string">"SyRkbQm2"</span></span>,
+  "<span class="hljs-attribute">authToken</span>": <span class="hljs-value"><span class="hljs-string">"HJeC1WmQh"</span>
+</span>}</code></pre>
+  </div>
+
+</div>
+
+              </li>
+            
+          </ul>
+        </div>
+      
+        <div class="group">
+          <a name="should-share-a-poll"></a>
+          <h2>should share a poll</h2>
+          <ul class="samples">
+            
+              <li>
+                <div class="summary">
+  <p>should share a poll</p>
+
+</div>
+
+<div class="operation">
+
+  <div class="method color-POST">
+    POST
+  </div>
+
+  <div class="request">
+    <div class="url">
+      POST
+      
+        <pre><code>/create/share/SyRkbQm2</code></pre>
+      
+    </div>
+    Sample request
+    <div class="expanders">
+      
+      
+        <a href="#sample2-request-headers">headers</a><span>
+      
+      
+        <a href="#sample2-request-payload">payload</a>
+      
+      
+      <a href="#sample2-request-curl">curl</a><span>
+    </div>
+  </div>
+
+  <div id="sample2-url" class="collapsible">
+    <pre><code>/create/share/SyRkbQm2</code></pre>
+  </div>
+  <div id="sample2-request-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json</span>
+<span class="hljs-attribute">content-length</span>: <span class="hljs-string">110</span>
+</code></pre>
+  </div>
+  <div id="sample2-request-payload" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">emails</span>": <span class="hljs-value">[
+    <span class="hljs-string">"Jasen_Ullrich23@yahoo.com"</span>,
+    <span class="hljs-string">"Skyla85@yahoo.com"</span>,
+    <span class="hljs-string">"Theo.Paucek72@gmail.com"</span>
+  ]</span>,
+  "<span class="hljs-attribute">authToken</span>": <span class="hljs-value"><span class="hljs-string">"HJeC1WmQh"</span>
+</span>}</code></pre>
+  </div>
+  <div id="sample2-request-attachments" class="collapsible">
+    
+  </div>
+  <div id="sample2-request-curl" class="collapsible">
+    <pre><code class="wrap">curl -X POST -H <span class="hljs-string">"content-type: application/json"</span> -H <span class="hljs-string">"content-length: 110"</span> -d <span class="hljs-string">'{"</span>emails<span class="hljs-string">":["</span>Jasen_Ullrich23@<span class="hljs-transposed_variable">yahoo.</span>com<span class="hljs-string">","</span>Skyla85@<span class="hljs-transposed_variable">yahoo.</span>com<span class="hljs-string">","</span><span class="hljs-transposed_variable">Theo.</span>Paucek72@<span class="hljs-transposed_variable">gmail.</span>com<span class="hljs-string">"],"</span>authToken<span class="hljs-string">":"</span>HJeC1WmQh<span class="hljs-string">"}'</span> <span class="hljs-string">"http://localhost/create/share/SyRkbQm2"</span></code></pre>
+  </div>
+
+  <div class="response">
+    Response 200 OK
+    <div class="expanders">
+      
+        <a href="#sample2-response-headers">headers</a>
+      
+      
+        <a href="#sample2-response-body">body</a>
+      
+    </div>
+  </div>
+
+  <div id="sample2-response-headers" class="collapsible">
+    <pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span>
+</code></pre>
+  </div>
+  <div id="sample2-response-body" class="collapsible">
+    <pre><code>{
+  "<span class="hljs-attribute">magiclinks</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">Jasen_Ullrich23@yahoo.com</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">authToken</span>": <span class="hljs-value"><span class="hljs-string">"ByZ0kbQ7n"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">Skyla85@yahoo.com</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">authToken</span>": <span class="hljs-value"><span class="hljs-string">"BJfRy-773"</span>
+    </span>}</span>,
+    "<span class="hljs-attribute">Theo.Paucek72@gmail.com</span>": <span class="hljs-value">{
+      "<span class="hljs-attribute">authToken</span>": <span class="hljs-value"><span class="hljs-string">"ByQ01bmXh"</span>
+    </span>}
+  </span>}
+</span>}</code></pre>
+  </div>
+
+</div>
+
+              </li>
+            
+          </ul>
+        </div>
+      
+      
+    </div>
+
+    <footer>
+  <div class="row">
+    <div class="medium-8 columns">
+      <ul class="no-bullet">
+        <li>
+          Documentation generated on September 11th 2016, 11:22 am
+        </li>
+        <li>
+          <a href="http://github.com/rprieto/supersamples">
+            Powered by supersamples
+            <div class="logo">
+              <div class="swatch color-GET"></div>
+              <div class="swatch color-POST"></div>
+              <div class="swatch color-PUT"></div>
+              <div class="swatch color-DELETE"></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="scripts/zepto.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+
+  </body>
+
+</html>
