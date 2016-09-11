@@ -33,7 +33,7 @@ describe 'Poll tests', ->
 			response.body.should.have.property 'pollId'
 			response.body.should.have.property 'authToken'
 			ownerauthToken = response.body.authToken
-			pollId = response.body.guid
+			pollId = response.body.pollId
 			done()
 	it 'should share a poll', (done) ->
 		server.post("/create/share/#{pollId}")

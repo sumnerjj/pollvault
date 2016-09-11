@@ -31,6 +31,7 @@ requireAuthKey = (req,res,next)->
 
 polls = require "./lib/polls.coffee"
 router.post "/create", polls.create
+router.post "/create/share/:pollId", polls.share
 
 
 app.use '/',router

@@ -33,10 +33,35 @@ exports.create = (req,res,next)->
 				"X-Contentful-Content-Type" : "poll",
 				"Content-Type" : "application/vnd.contentful.management.v1+json"
 			},
-		}, (cf_err, cf_rp,cf_body)->
+		}, (cf_err, cf_rp, cf_body)->
 			if cf_err? or cf_body.sys?.type is "Error"
 				console.log "We got an error from ContentFul", cf_err, JSON.stringify(cf_body)
 				res.sendStatus 500
 			else
 				res.json {pollId:newpollId,authToken:newownerId}
 				next()
+
+
+exports.share = (req,res,next)->
+	#console.log req
+	poll_id = req.params.pollId
+	auth_token = req.body.authToken
+	emails = req.body.emails
+	console.log poll_id, auth_token, emails
+
+	request {
+			method:"GET", 
+			url: "https://api.contentful.com/spaces/#{config.contentfulspace}/entries/#{poll_id}?access_token=#{config.access_key}",
+			headers : {
+				"X-Contentful-Content-Type" : "poll",
+				"Content-Type" : "application/vnd.contentful.management.v1+json"
+			},
+		}, (cf_err, cf_rp, cf_body)->
+			if cf_err? or cf_body.sys?.type is "Error"
+				console.log "We got an error from ContentFul", cf_err, JSON.stringify(cf_body)
+				res.sendStatus 500
+
+			else
+				console.log "here's the stuff: ", JSON.stringify(cf_body)
+				#res.json {pollId:newpollId,authToken:newownerId}
+				#next()
