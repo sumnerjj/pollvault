@@ -65,7 +65,23 @@ exports.share = (req,res,next)->
 				res.sendStatus 403
 
 exports.savevote = (req,res,next)->
-	res.sendStatus 200
+	if !req.params.pollId? or !req.params.authToken?
+		res.sendStatus 401
+	else
+		filename = "#{config.filespath }/#{req.params.pollId}_#{req.params.authToken}.json"
+		fs.readFile filename, (err_read,data)->
+			if err_read?
+				console.log "Error while reading #{filename}", err_read
+				res.sendStatus 404
+			else
+				fs.writeFile filename, JSON.stringify(req.body.responses), (err_write)->
+					if err_write?
+						console.log "Error while writing #{filename}", err_write
+						res.sendStatus 500
+					else
+						#ok lets save the reult
+						console.log  "here.."
+						res.sendStatus 200
 
 exports.getresults = (req,res,next)->
 	res.sendStatus 200
