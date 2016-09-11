@@ -6,7 +6,7 @@ request = require "request"
 fs = require "fs"
 
 exports.create = (req,res,next)->
-	if !req.body.question? or !Array.isArray(req.body.pollOptions) or !req.body.pollOptions.length > 1
+	if !req.body.question? or !Array.isArray(req.body.options) or !req.body.options.length > 1
 		res.sendStatus 500
 	else
 		req.body.period_start ?= ~~((new Date().getTime)/1000)
@@ -16,7 +16,7 @@ exports.create = (req,res,next)->
 		filepath = config.filespath + "/#{newpollId}.json"
 		fs.writeFile filepath, JSON.stringify({
 					question: req.body.question
-					responses : req.body.pollOptions
+					options : req.body.options
 					period_start : req.body.period_start
 					period_end : req.body.period_end
 					creator_auth_token : newownerId
@@ -68,7 +68,7 @@ exports.savevote = (req,res,next)->
 	if !req.params.pollId? or !req.params.authToken?
 		res.sendStatus 401
 	else
-		filename = "#{config.filespath }/#{req.params.pollId}_#{req.params.authToken}.json"
+		filename = "#{config.filespath}/#{req.params.pollId}_#{req.params.authToken}.json"
 		fs.readFile filename, (err_read,data)->
 			if err_read?
 				console.log "Error while reading #{filename}", err_read
@@ -79,12 +79,60 @@ exports.savevote = (req,res,next)->
 						console.log "Error while writing #{filename}", err_write
 						res.sendStatus 500
 					else
-						#ok lets save the reult
-						console.log  "here.."
+						#ok lets save the result
 						res.sendStatus 200
 
+
+sendResults = (pollId,polldata,res)->
+	fs.readdir "#{config.filespath}",(err,files)->
+		if err?
+			res.sendStatus 404
+		else
+			files = files.filter (e)->
+				return e.indexOf("#{pollId}_") isnt -1
+			polldata.responses = []
+			async.each files, (filename,cb)->
+				fs.readFile  "#{config.filespath}/#{filename}", (err_read,data)->
+					polldata.responses.push JSON.parse(data) if !err_read
+					cb(err_read)
+			,(generr)->
+				if generr
+					res.sendStatus 500
+				else
+					delete polldata.creator_auth_token
+					res.json polldata
+
 exports.getresults = (req,res,next)->
-	res.sendStatus 200
+	if !req.params.pollId? or !req.params.authToken?
+		res.sendStatus 401
+	else
+		filename = "#{config.filespath}/#{req.params.pollId}.json"
+		fs.readFile filename, (err_read,data)->
+			if err_read?
+				console.log "Error while reading #{filename}", err_read
+				res.sendStatus 404
+			else
+				polldata = JSON.parse(data)
+				#we need to check if if is the owner
+				if req.params.authToken is polldata.creator_auth_token
+					# send the results because .. owner !
+					sendResults(req.params.pollId,polldata,res)
+				else
+					#ok lets check if it is actually a real participant
+					filename = "#{config.filespath}/#{req.params.pollId}_#{req.params.authToken}.json"
+					fs.exists filename, (exists)->
+						if exists
+							console.log "#{filename} does not extists"
+							res.sendStatus 404
+						else
+							sendResults(req.params.pollId,polldata,res)
+
+
+				
+
+
+
+
 
 
 

@@ -22,7 +22,7 @@ describe 'Poll tests', ->
 		.timeout(default_timeout)
 		.send({
 			question:question_title,
-			pollOptions: responses
+			options: responses
 			period_start : period_start
 			period_end :  period_end
 			})
@@ -74,10 +74,13 @@ describe 'Poll tests', ->
 		.expect(200)
 		.end (error, response) ->
 			response.status.should.equal 200
-			response.body.should.have.property 'results'
+			response.body.should.have.property 'responses'
+			response.body.responses.should.be.array
+			a_response = response.body.responses.filter (e)->
+				Object.keys(e).length isnt 0
 			for result in responses
-				response.body.responses.should.have.property result
-				response.body.responses[result].should.be.within(0, 1)
+				a_response[0].should.have.property result
+				a_response[0][result].should.be.within(0, 1)
 			done()
 	testemail = fakeemails[1]
 	it "#{testemail} shoud be able to get the results", (done)->
@@ -87,8 +90,12 @@ describe 'Poll tests', ->
 		.expect(200)
 		.end (error, response) ->
 			response.status.should.equal 200
-			response.body.should.have.property 'results'
-			for result, value of response.body.results
-				response.body.responses[result].should.be.within(0, 1)
+			response.body.should.have.property 'responses'
+			response.body.responses.should.be.array
+			a_response = response.body.responses.filter (e)->
+				Object.keys(e).length isnt 0
+			for result in responses
+				a_response[0].should.have.property result
+				a_response[0][result].should.be.within(0, 1)
 			done()
 
