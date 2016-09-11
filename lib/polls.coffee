@@ -64,9 +64,11 @@ exports.share = (req,res,next)->
 			else
 				res.sendStatus 403
 
+exports.savevote = (req,res,next)->
+	res.sendStatus 200
 
-
-
+exports.getresults = (req,res,next)->
+	res.sendStatus 200
 
 
 
