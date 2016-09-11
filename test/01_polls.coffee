@@ -6,6 +6,7 @@ server = supertest.agent require('../index.coffee')
 default_timeout = 30000
 
 pollId = null
+question_title = "Who to do you plan to vote for #{faker.name.firstName()}?"
 fakeemails = [faker.internet.email(),faker.internet.email(),faker.internet.email()]
 magiclinks = {}
 responses = ["Hillary","Trump"]
@@ -20,7 +21,7 @@ describe 'Poll tests', ->
 		server.post("/create")
 		.timeout(default_timeout)
 		.send({
-			question:"Who to do you plan to vote for ?",
+			question:question_title,
 			responses: responses
 			period_start : period_start
 			period_end :  period_end
