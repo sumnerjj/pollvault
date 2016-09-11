@@ -52,23 +52,21 @@ describe 'Poll tests', ->
 				response.body.magiclinks[email].should.have.property 'authToken'
 			magiclinks = response.body.magiclinks
 			done()
-
-for email, magiclink of magiclinks
-	describe "Poll Responses tests for #{email}", ->
+	testemail = fakeemails[0]
+	it "should accept votes from #{testemail}", (done)->
 		payload_responses = {}
 		for res in responses
 			payload_responses[res] = possiblevalues[Math.floor(Math.random()*possiblevalues.length)]
-		it "should accept votes from #{email}", (done)->
-			server.post("/poll/vote/#{pollId}/#{authToken}")
-			.timeout(default_timeout)
-			.send({
-				responses : payload_responses
-			})
-			.expect('Content-type', /json/)
-			.expect(200)
-			.end (err,response)->
-				response.status.should.equal 200
-				done()
+		server.post("/poll/vote/#{pollId}/#{magiclinks[testemail].authToken}")
+		.timeout(default_timeout)
+		.send({
+			responses : payload_responses
+		})
+		.expect('Content-type', /json/)
+		.expect(200)
+		.end (err,response)->
+			response.status.should.equal 200
+			done()
 
 describe "Owner should be able to see the Poll Results", ->
 	it "shoud be able to get the results", (done)->

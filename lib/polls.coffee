@@ -45,7 +45,6 @@ exports.share = (req,res,next)->
 			#res.json {pollId:newpollId,authToken:newownerId}
 			#next()
 			if auth_token is creator_auth_token
-				console.log "authenticated success"
 				payload = {}
 				async.each emails, (email,cb)->
 					new_user_auth = shortid.generate()
