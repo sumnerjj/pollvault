@@ -29,7 +29,6 @@ exports.create = (req,res,next)->
 				res.json {pollId:newpollId,authToken:newownerId}
 				next()
 
-
 exports.share = (req,res,next)->
 	poll_id = req.params.pollId
 	auth_token = req.body.authToken

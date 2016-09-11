@@ -59,10 +59,9 @@ for email, magiclink of magiclinks
 		for res in responses
 			payload_responses[res] = possiblevalues[Math.floor(Math.random()*possiblevalues.length)]
 		it "should accept votes from #{email}", (done)->
-			server.post("/poll/vote/#{pollId}")
+			server.post("/poll/vote/#{pollId}/#{authToken}")
 			.timeout(default_timeout)
 			.send({
-				authToken : magiclink.authToken
 				responses : payload_responses
 			})
 			.expect('Content-type', /json/)
@@ -73,7 +72,7 @@ for email, magiclink of magiclinks
 
 describe "Owner should be able to see the Poll Results", ->
 	it "shoud be able to get the results", (done)->
-		server.get("/poll/#{pollId}", {authToken:ownerauthToken})
+		server.get("/poll/#{pollId}/#{ownerauthToken}")
 		.timeout(default_timeout)
 		.expect('Content-type', /json/)
 		.expect(200)
@@ -87,7 +86,7 @@ describe "Owner should be able to see the Poll Results", ->
 for email, magiclink of magiclinks
 	describe "#{email} should be able to see the Poll Results", ->
 		it "shoud be able to get the results", (done)->
-			server.get("/poll/#{pollId}", {authToken:magiclink.authToken})
+			server.get("/poll/#{pollId}/#{magiclink.authToken}")
 			.timeout(default_timeout)
 			.expect('Content-type', /json/)
 			.expect(200)
