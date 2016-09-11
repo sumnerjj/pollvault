@@ -6,12 +6,12 @@ app.use bodyParser.urlencoded({extended:true})
 app.use bodyParser.json()
 router = express.Router()
  
-contentful = require('contentful')
-util = require('util')
-client = contentful.createClient({
-  space: config.contentfulspace,
-  accessToken: config.contenfulkey
-})
+# Allow requests from anywhere .. 
+app.use (req, res, next)->
+  res.header "Access-Control-Allow-Origin", "*"
+  res.header "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"
+  next()
+
 
 router.get '/',(req,res)->
 	res.json {"message" : "Hello !"}
